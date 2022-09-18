@@ -4,9 +4,12 @@ import fetch from "node-fetch";
 import * as fs from "fs";
 import { IResponse, ITokenPorfolio, ITransactionRecord, TOKEN_NAME } from './interface';
 import constant from './constant';
+import yargs from 'yargs';
 
 const transactions: [ITransactionRecord?] = [];
-const concurrencyUnit = ['USD']
+
+let argv = yargs.argv;
+const concurrencyUnit = argv?.concurrencyUnit?.split(',') || ['USD']
 const tokensPorfolio: [ITokenPorfolio?] = [];
 
 fs.createReadStream(constant.PATH)
